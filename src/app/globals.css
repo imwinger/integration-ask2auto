@@ -1,26 +1,108 @@
 @import "tailwindcss";
 
+/* ── Brand typeface (Google Sans Flex) ── */
+@font-face {
+  font-family: "Google Sans Flex";
+  src: url("/fonts/GoogleSansFlex-VariableFont_GRAD_ROND_opsz_slnt_wdth_wght.ttf") format("truetype");
+  font-weight: 100 900;
+  font-stretch: 75% 125%;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* ── MD3 Token overrides (Ask2Auto orange primary, light theme) ── */
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  color-scheme: light;
+
+  --md-primary: #C2511A;
+  --md-on-primary: #ffffff;
+  --md-primary-container: #FFEAD9;
+  --md-on-primary-container: #6E2F00;
+  --md-brand: #F36B21;
+
+  --md-secondary: #735B3E;
+  --md-on-secondary: #ffffff;
+  --md-secondary-container: #FDDEB0;
+  --md-on-secondary-container: #574419;
+
+  --md-tertiary: #9A4A1F;
+  --md-tertiary-container: #FFDBC8;
+
+  --md-error: #B3261E;
+  --md-on-error: #ffffff;
+  --md-error-container: #F9DEDC;
+  --md-on-error-container: #8C1D18;
+
+  --md-surface: #FEF7FF;
+  --md-on-surface: #1D1B20;
+  --md-on-surface-variant: #49454F;
+  --md-surface-dim: #DED8E1;
+  --md-surface-container-lowest: #ffffff;
+  --md-surface-container-low: #F7F2FA;
+  --md-surface-container: #F3EDF7;
+  --md-surface-container-high: #ECE6F0;
+  --md-surface-container-highest: #E6E0E9;
+
+  --md-outline: #79747E;
+  --md-outline-variant: #CAC4D0;
+
+  --md-font-brand: "Google Sans Flex", "Roboto", system-ui, sans-serif;
+  --md-font-plain: "Roboto", system-ui, sans-serif;
+
+  --md-corner-xs: 4px;
+  --md-corner-sm: 8px;
+  --md-corner-md: 12px;
+  --md-corner-lg: 16px;
+  --md-corner-xl: 28px;
+  --md-corner-full: 9999px;
 }
 
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --color-md-primary: var(--md-primary);
+  --color-md-on-primary: var(--md-on-primary);
+  --color-md-primary-ctr: var(--md-primary-container);
+  --color-md-on-primary-ctr: var(--md-on-primary-container);
+  --color-md-brand: var(--md-brand);
+
+  --color-md-secondary-ctr: var(--md-secondary-container);
+  --color-md-on-secondary-ctr: var(--md-on-secondary-container);
+
+  --color-md-error: var(--md-error);
+  --color-md-on-error: var(--md-on-error);
+  --color-md-error-ctr: var(--md-error-container);
+  --color-md-on-error-ctr: var(--md-on-error-container);
+
+  --color-md-surface: var(--md-surface);
+  --color-md-on-surface: var(--md-on-surface);
+  --color-md-on-surface-var: var(--md-on-surface-variant);
+  --color-md-surface-dim: var(--md-surface-dim);
+  --color-md-surface-ctr-lowest: var(--md-surface-container-lowest);
+  --color-md-surface-ctr-low: var(--md-surface-container-low);
+  --color-md-surface-ctr: var(--md-surface-container);
+  --color-md-surface-ctr-high: var(--md-surface-container-high);
+  --color-md-surface-ctr-highest: var(--md-surface-container-highest);
+
+  --color-md-outline: var(--md-outline);
+  --color-md-outline-var: var(--md-outline-variant);
+
+  --font-brand: var(--md-font-brand);
+  --font-plain: var(--md-font-plain);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
-}
+html, body { height: 100%; }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background: var(--md-surface-container);
+  color: var(--md-on-surface);
+  font-family: var(--md-font-plain);
+  -webkit-font-smoothing: antialiased;
 }
+
+/* Material Symbols icon helper */
+.material-symbols-outlined {
+  font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+  vertical-align: middle;
+  line-height: 1;
+}
+
+input[type="file"] { cursor: pointer; }

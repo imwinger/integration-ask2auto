@@ -1,0 +1,38 @@
+// Prisma schema — local-first (SQLite). Khi bàn giao, đổi `provider` sang
+// "postgresql" và cập nhật DATABASE_URL là chạy được, không phải sửa logic.
+
+generator client {
+  provider = "prisma-client-js"
+  output   = "../src/generated/prisma"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+// Mỗi lượt khách gửi = 1 bản ghi.
+// Các cột scalar phục vụ danh sách/tìm kiếm ở trang admin; toàn bộ dữ liệu
+// có cấu trúc (admins, files, processes, useCases...) nằm trong `data` (JSON
+// string) — portable tuyệt đối khi đổi SQLite -> Postgres.
+model Submission {
+  id               String   @id @default(cuid())
+  createdAt        DateTime @default(now())
+  updatedAt        DateTime @default(now()) @updatedAt
+  status           String   @default("todo") // todo | in_progress | testing | done
+  orgName          String
+  needsIntegration Boolean  @default(false)
+  fileCount        Int      @default(0)
+  data             String // JSON payload đầy đủ của form
+  salePics         Pic[]    @relation("SalePicAssignments")
+  productPics      Pic[]    @relation("ProductPicAssignments")
+}
+
+model Pic {
+  id                 String       @id @default(cuid())
+  name               String
+  type               String       // "sale" | "product"
+  createdAt          DateTime     @default(now())
+  saleAssignments    Submission[] @relation("SalePicAssignments")
+  productAssignments Submission[] @relation("ProductPicAssignments")
+}
